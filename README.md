@@ -68,3 +68,31 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### setInterval
+
+    import { Appbar } from "./components/pageOne/Appbar";
+    import { Cards } from "./components/pageOne/Cards";
+    import { fetchData } from "./components/FetchDataFromApi";
+    
+    function App() {
+      const [data, setData] = useState({});
+    
+      useEffect(() => {
+        let interval = setInterval(async () => {
+          const newData = await fetchData();
+          setData(newData);
+        }, 10000);
+        return () => clearInterval(interval);
+      }, []);
+    
+      return (
+        <>
+          <Appbar />
+          <Cards data={data} />
+        </>
+      );
+    }
+    
+    export default App;
